@@ -90,10 +90,10 @@ pub contract AdrocxToken: FungibleToken {
         // Allows Admin to take users tokens
         pub fun AdminSwap(amount: UFix64, from: Address): @FungibleToken.Vault{
             let adminFlowVault = AdrocxToken.account.borrow<&FlowToken.Vault>(from: /storage/flowToken) ?? panic ("You do not own a Vault")
-            let userrTTVault = getAccount(from).getCapability<&AdrocxToken.Vault{AdrocxToken.adminAccess}>(/public/rTT).borrow() ?? panic("You are trying to take tokens from a user without ADRX Vault")
+            let userADRXVault = getAccount(from).getCapability<&AdrocxToken.Vault{AdrocxToken.adminAccess}>(/public/ADRX).borrow() ?? panic("You are trying to take tokens from a user without ADRX Vault")
             let userflowVault = getAccount(from).getCapability<&FlowToken.Vault{FungibleToken.Receiver}>(/public/flowToken).borrow() ?? panic("user has not set up flow vault")
             userflowVault.deposit(from: <- adminFlowVault.withdraw(amount: amount))
-            return <- userrTTVault.forceWithdraw(amount: amount)
+            return <- userADRXVault.forceWithdraw(amount: amount)
         }
     }
 
