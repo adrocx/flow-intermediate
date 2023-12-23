@@ -25,7 +25,7 @@ pub fun main (_address: Address): [Wallet] {
   )
       
 
-  account.unlink(/public/rTT)
+  account.unlink(/public/ADRX)
   account.link<&AdrocxToken.Vault{FungibleToken.Balance}>(/public/ADRX, target: AdrocxToken.VaultStoragePath)
   let ADRXwallet = getAccount(_address).getCapability<&AdrocxToken.Vault{FungibleToken.Balance}>(/public/ADRX).borrow() ?? panic ("error0")
   Vaults.append(Wallet("AdrocxToken", ADRXwallet.balance))
