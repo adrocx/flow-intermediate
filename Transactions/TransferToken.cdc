@@ -9,9 +9,9 @@ transaction(recipient: Address, amount: UFix64) {
   let RecipientVault: &AdrocxToken.Vault{FungibleToken.Receiver}
 
   prepare(signer: AuthAccount) {
-    // Borrow signer's `&redtibby.Vault`
+  
     self.Vault = signer.borrow<&AdrocxToken.Vault>(from: AdrocxToken.VaultStoragePath) ?? panic ("You do not own a Vault")
-    // Borrow recipient's `&redtibby.Vault{FungibleToken.Receiver}`
+    
     self.RecipientVault = getAccount(recipient).getCapability(/public/rTT)
               .borrow<&AdrocxToken.Vault{FungibleToken.Receiver}>() ?? panic ("The receipient does not own a vault")
   }
