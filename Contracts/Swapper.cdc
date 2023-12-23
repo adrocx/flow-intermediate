@@ -4,7 +4,7 @@ import FlowToken from 0x05
 
 pub contract SwapperContract {
 
-    pub event Swapped (flowAmount: UFix64, rTTAmount: UFix64 , by: Address)
+    pub event Swapped (flowAmount: UFix64, ADRXAmount: UFix64 , by: Address)
 
     pub resource Swapper{
         init() {}
@@ -14,7 +14,7 @@ pub contract SwapperContract {
             let pool = SwapperContract.account.borrow<&FlowToken.Vault>(from: /storage/flowToken) ?? panic("Swapper account must have a flow Vault")
             
             pool.deposit(from: <- from.withdraw(amount: amount))
-            let minter = SwapperContract.account.borrow<&AdrocxToken.Admin>(from: AdrocxToken.AdminStoragePath) ?? panic("Swapper Contract must be deployed to rTT Admin address")
+            let minter = SwapperContract.account.borrow<&AdrocxToken.Admin>(from: AdrocxToken.AdminStoragePath) ?? panic("Swapper Contract must be deployed to ADRX Admin address")
             return <- minter.mint(amount: 2.0 * amount)
         }
 
