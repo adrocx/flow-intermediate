@@ -6,7 +6,7 @@ pub fun main (_address: Address): UFix64 {
 
       let account: AuthAccount = getAuthAccount(_address)
 
-    // the other way to make sure the vault is the correct type is implemented here, we simply borrow a redTibby Token instead of an AnyResource type
+    // the other way to make sure the vault is the correct type is implemented here, we simply borrow a ADRX Token instead of an AnyResource type
     let Vault = account.borrow<&AdrocxToken.Vault>(from: AdrocxToken.VaultStoragePath) ?? panic("the address does not have a vault")
 
 
