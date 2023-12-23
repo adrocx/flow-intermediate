@@ -9,7 +9,7 @@ transaction (amount: UFix64, receipient: Address) {
 
     prepare (signer: AuthAccount) {
         self.minter = signer.borrow<&AdrocxToken.Admin>(from:AdrocxToken.AdminStoragePath) ?? panic ("You are not the ADRX admin")
-        self.receiver = getAccount(receipient).getCapability<&AdrocxToken.Vault{FungibleToken.Receiver}>(/public/rTT).borrow() ?? panic ("Error, Check your receiver's ADRX Vault status")
+        self.receiver = getAccount(receipient).getCapability<&AdrocxToken.Vault{FungibleToken.Receiver}>(/public/ADRX).borrow() ?? panic ("Error, Check your receiver's ADRX Vault status")
     }
 
     execute {
